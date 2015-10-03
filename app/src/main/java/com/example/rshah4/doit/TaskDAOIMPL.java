@@ -20,12 +20,13 @@ import java.util.List;
 public class TaskDAOIMPL extends MainActivity implements TaskDAO {
 
     String fileName = "todo.txt";
-
+    DoItDatabase db;
     Context appContext ;
 
     @Override
     public void setAppContext(Context appContext) {
         this.appContext = appContext;
+        db = DoItDatabase.getInstance(this.appContext);
     }
 
 
@@ -33,6 +34,11 @@ public class TaskDAOIMPL extends MainActivity implements TaskDAO {
     public List<Tasks> getTasks() {
 
         List<Tasks> allTasks = new ArrayList<Tasks>();
+
+
+        allTasks = db.getAllTasks();
+        /* For file input output
+
         File file = this.getFile(fileName);
         List<String> lines = null;
         try {
@@ -45,6 +51,9 @@ public class TaskDAOIMPL extends MainActivity implements TaskDAO {
             Tasks t = new Tasks(line);
             allTasks.add(t);
         }
+        */
+
+
         return allTasks;
     }
 
@@ -54,7 +63,9 @@ public class TaskDAOIMPL extends MainActivity implements TaskDAO {
     }
 
     @Override
-    public boolean createTask(List<Tasks> tasks) {
+    public void createTask(List<Tasks> tasks) {
+
+        /* File operation
         File file = this.getFile(fileName);
 
         System.out.println("Adding items to file...");
@@ -69,12 +80,14 @@ public class TaskDAOIMPL extends MainActivity implements TaskDAO {
             e.printStackTrace();
         }
         System.out.println("Items added to file...");
-        return false;
+        return false;*/
+        db.addTasks(tasks);
     }
 
     @Override
-    public boolean updateTask(int id) {
-        return false;
+    public void updateTask(Tasks t) {
+        db.updateTask(t);
+
     }
     public File getFile(String filename) {
 
@@ -91,11 +104,16 @@ public class TaskDAOIMPL extends MainActivity implements TaskDAO {
         }
     }
     @Override
-    public boolean removeTask(String task) {
+    public void removeTask(Tasks task) {
+
+        db.deleteTask(task);
+
+        /* for file operation
         File file = this.getFile(fileName);
         // locate the lines
         // remove the lines from file
         return true;
+        */
     }
 
 }

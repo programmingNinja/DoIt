@@ -12,9 +12,9 @@ public interface TaskDAO {
 
     List<Tasks> getTasks();
     Tasks getTask(int id);
-    boolean createTask(List<Tasks> task);
-    boolean updateTask(int id);
-    boolean removeTask(String task);
+    void createTask(List<Tasks> task);
+    void updateTask(Tasks t);
+    void removeTask(Tasks task);
 
     void setAppContext(Context applicationContext);
 }

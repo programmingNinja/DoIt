@@ -38,6 +38,5 @@
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/newTaskButton"
         android:layout_toStartOf="@+id/newTaskButton"
-        android:text="@string/add"
         android:hint="@string/add_item" />
 </RelativeLayout>
